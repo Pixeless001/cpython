@@ -2467,6 +2467,10 @@ class TestArchives(BaseTest, unittest.TestCase):
         ensure_lazy_imports("shutil",
                             {"bz2", "lzma", "compression", "compression.zstd"})
 
+    def test_fnmatch_not_imported_by_shutil(self):
+        # fnmatch pulls in re, but only ignore_patterns() needs it.
+        ensure_lazy_imports("shutil", {"fnmatch", "re"})
+
 
 class TestMisc(BaseTest, unittest.TestCase):
 
